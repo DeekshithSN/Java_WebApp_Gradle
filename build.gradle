@@ -25,9 +25,3 @@ test {
 	useJUnitPlatform()
 }
 
-
-sonarqube {
-    properties {
-        property 'sonar.host.url', 'http://34.125.75.197:9000'
-    }
-}
