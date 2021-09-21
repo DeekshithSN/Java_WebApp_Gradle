@@ -17,7 +17,7 @@ pipeline{
 
                agent {
                   docker {
-                  image 'gradle'
+                  image 'openjdk:11'
                 }
             }
                 steps{
