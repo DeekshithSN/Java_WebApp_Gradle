@@ -23,6 +23,7 @@ pipeline{
                 steps{
                   script{
                     withSonarQubeEnv('sonarserver') { 
+                      sh "chmod +x gradlew"
                       sh "./gradlew sonarqube"
                        }
                       timeout(time: 1, unit: 'HOURS') {
