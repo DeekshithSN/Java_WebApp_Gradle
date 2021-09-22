@@ -1,16 +1,10 @@
-currentBuild.displayName = "Final_Demo # "+currentBuild.number
-
-   def getDockerTag(){
-        def tag = sh script: 'git rev-parse HEAD', returnStdout: true
-        return tag
-        }
+currentBuild.displayName = "Spring_gradle # "+currentBuild.number
         
-
 pipeline{
         agent any  
-        environment{
-	        Docker_tag = getDockerTag()
-        }
+        environment { 
+            VERSION = "${env.BUILD_ID}"
+            }
         
         stages{
               stage('Quality Gate Statuc Check'){
@@ -35,6 +29,20 @@ pipeline{
                     }
                   }
                 }  
-              }   
+              }
+		    stage('docker image creation stage'){
+                steps{
+                    script{
+                        sh '''
+                        docker build -t 34.125.251.15:8083/springapp:${VERSION} .
+                        docker login -u admin -p admin 34.125.251.15:8083
+                        docker push 34.125.251.15:8083/springapp:${VERSION}
+                        ''' 
+                        
+                    }
+                }
+
             }
-          }
+	  	
+        }
+    }
