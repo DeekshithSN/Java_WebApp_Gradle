@@ -3,7 +3,7 @@ currentBuild.displayName = "Spring_gradle # "+currentBuild.number
 pipeline{
         agent any  
         environment { 
-            VERSION = "${env.BUILD_ID}"
+            VERSION = "${env.BUILD_ID}-${env.GIT_COMMIT}"
             }
         
         stages{
@@ -33,12 +33,14 @@ pipeline{
 		    stage('docker image creation stage'){
                 steps{
                     script{
+                        withCredentials([string(credentialsId: 'docker_password', variable: 'docker_password')]) {
+			
                         sh '''
                         docker build -t 34.125.251.15:8083/springapp:${VERSION} .
-                        docker login -u admin -p admin 34.125.251.15:8083
+                        docker login -u admin -p $docker_password 34.125.251.15:8083
                         docker push 34.125.251.15:8083/springapp:${VERSION}
                         ''' 
-                        
+                        }
                     }
                 }
 
