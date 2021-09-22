@@ -25,6 +25,7 @@ pipeline{
                     withSonarQubeEnv('sonarserver') { 
                       sh "chmod +x gradlew"
                       sh "java -version"
+		      sh "echo extra"
                       sh "./gradlew sonarqube"
                        }
                       timeout(time: 1, unit: 'HOURS') {
