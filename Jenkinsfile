@@ -45,6 +45,18 @@ pipeline{
                 }
 
             }
-	  	
+
+        stage('checking for misconfigurations'){
+          steps{
+            script{
+              dir ("kubernetes/"){
+                sh 'helm datree test myapp'
+                sh 'echo $?'
+              }
+
+            }
+          }
         }
+	  	
+      }
     }
