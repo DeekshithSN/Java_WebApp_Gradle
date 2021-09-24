@@ -51,7 +51,7 @@ pipeline{
             script{
               dir ("kubernetes/"){
                 sh 'helm datree test myapp'
-                sh "echo $?"
+                sh 'echo $?'
               }
 
             }
