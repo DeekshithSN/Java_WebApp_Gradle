@@ -51,11 +51,19 @@ pipeline{
             script{
               dir ("kubernetes/"){
                 sh 'helm datree test myapp'
-                sh 'echo $?'
               }
-
             }
           }
+        }
+		
+      stage('pushing helm charts to artifactory'){
+	steps{
+	  script{
+		  sh '''
+		  
+		  '''
+            }
+	  }
         }
 	  	
       }
