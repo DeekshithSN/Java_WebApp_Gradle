@@ -3,7 +3,7 @@ currentBuild.displayName = "Spring_gradle # "+currentBuild.number
 pipeline{
         agent any  
         environment { 
-            VERSION = "${env.BUILD_ID}-${env.GIT_COMMIT}"
+            VERSION = "${env.BUILD_ID}"
             }
         
         stages{
@@ -59,9 +59,12 @@ pipeline{
       stage('pushing helm charts to artifactory'){
 	steps{
 	  script{
+             dir ("kubernetes/"){
 		  sh '''
-		  
+		  tar -czvf myapp-${VERSION}.tgz myapp/
+		  curl -u admin:admin http://34.125.27.120:8081/repository/helm-hosted/ --upload-file myapp-${VERSION}.tgz -v
 		  '''
+	      }
             }
 	  }
         }
