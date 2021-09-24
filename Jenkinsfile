@@ -46,7 +46,7 @@ pipeline{
 
             }
 
-        stage('checking for misconfigurations'){
+        stage('checking misconfigurations of k8s manifest using datree'){
           steps{
             script{
               dir ("kubernetes/"){
