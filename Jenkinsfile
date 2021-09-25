@@ -60,12 +60,14 @@ pipeline{
       stage('pushing helm charts to artifactory'){
 	steps{
 	  script{
-             dir ("kubernetes/"){
+            withCredentials([string(credentialsId: 'docker_password', variable: 'docker_password')]) {
+              dir ("kubernetes/"){
 		  sh '''
 		  helmversion=$(helm show chart . | grep version | cut -d: -f2)
 		  tar -czvf myapp-${helmversion}.tgz myapp/
 		  curl -u admin:admin http://34.125.27.120:8081/repository/helm-hosted/ --upload-file myapp-${helmversion}.tgz -v
 		  '''
+	        }
 	      }
             }
 	  }
