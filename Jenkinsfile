@@ -73,6 +73,17 @@ pipeline{
             }
 	  }
         }
+	
+		stage('connecting to k8s cluster'){
+		  steps{
+	            script{
+			    withCredentials([kubeconfigFile(credentialsId: 'kubernetes-config', variable: 'KUBECONFIG')]) {
+   				sh 'kubectl get po'
+				sh 'helm list'
+			} 
+		    }		
+		  }
+		}
 	  	
       }
     }
