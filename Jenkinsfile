@@ -77,10 +77,15 @@ pipeline{
 		stage('connecting to k8s cluster'){
 		  steps{
 	            script{
-			    withCredentials([kubeconfigFile(credentialsId: 'kubernetes-config', variable: 'KUBECONFIG')]) {
+	    		withCredentials([kubeconfigFile(credentialsId: 'kubernetes-config', variable: 'KUBECONFIG')]) {
+			  dir ("kubernetes/"){  
    				sh 'kubectl get po'
 				sh 'helm list'
-			} 
+				sh 'sed -i "s!IMAGE_NAME!34.125.27.120:8083/springapp!g" myapp/values.yaml'
+				sh 'sed -i "s!IMAGE_TAG!${VERSION}!g" myapp/values.yaml'
+				sh 'cat myapp/values.yaml'
+			  }
+		       } 
 		    }		
 		  }
 		}
