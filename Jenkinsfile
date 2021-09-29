@@ -90,8 +90,10 @@ pipeline{
 		stage('Testing application health'){
 	    	  steps{
 	 	    script{
-			sh 'sleep 30'
-			sh 
+		      withCredentials([kubeconfigFile(credentialsId: 'kubernetes-config', variable: 'KUBECONFIG')]) {
+			sh 'sleep 60'
+			sh 'kubectl run curl --image=curlimages/curl -i --rm --restart=Never -- curl test-myapp:8080'
+		      }
 		    }	  
 		  }
 		}
