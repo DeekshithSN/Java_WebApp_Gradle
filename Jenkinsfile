@@ -7,14 +7,7 @@ pipeline{
             }
         
         stages{
-		
-	 stage('checking misconfigurations of k8s manifest using datree'){
-          steps{
-            script{
-             sh 'docker rmi $( docker images -aq )'
-            }
-          }
-        }
+	
 	
               stage('Quality Gate Statuc Check'){
 
