@@ -81,6 +81,7 @@ pipeline{
 			  dir ("kubernetes/"){  
    				sh 'kubectl get po'
 				sh 'helm list'
+				sh 'helm upgrade --install --set image.repository="34.125.132.246:8083/springapp" --set image.tag="${VERSION}" myjavaapp myapp/ ' 
 			  }
 		       } 
 		    }		
