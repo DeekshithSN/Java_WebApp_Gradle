@@ -1,4 +1,4 @@
-currentBuild.displayName = "Spring_gradle # "+currentBuild.number
+
         
 pipeline{
         agent any  
