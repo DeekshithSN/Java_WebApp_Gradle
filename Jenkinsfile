@@ -75,6 +75,18 @@ pipeline{
             }
 	  }
         }
+		
+		stage('build') {
+			steps {
+			    script {
+			      timeout(time: 10, unit: 'MINUTES') {
+			        mail bcc: '', body: "<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL} By going jenkins URL please approve the deployment", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "${currentBuild.result} CI: Project name -> ${env.JOB_NAME}", to: "deekshith.snsep@foomail.com";
+				input(id: "Deploy Gate", message: "Deploy ${params.project_name}?", ok: 'Deploy')
+			      }
+			    }
+			}
+		    }
+
 	
 		stage('connecting to k8s cluster'){
 		  steps{
@@ -105,7 +117,7 @@ pipeline{
 	
 	post {
 		always {
-			mail bcc: '', body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "${currentBuild.result} CI: Project name -> ${env.JOB_NAME}", to: "foo@foomail.com";  
+			mail bcc: '', body: "<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "${currentBuild.result} CI: Project name -> ${env.JOB_NAME}", to: "deekshith.snsep@foomail.com";  
 		}
 	}
 	
