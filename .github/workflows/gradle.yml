@@ -14,6 +14,7 @@ jobs:
     - name: Grant execute permission for gradlew
       run: |
         whoami
+        chown -R alerts_deekshith:alerts_deekshith /home/alerts_deekshith/actions-runner
     - uses: AutoModality/action-clean@v1    
     - uses: actions/checkout@v2
     - name: Set up JDK 11
