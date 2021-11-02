@@ -34,7 +34,7 @@ jobs:
        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     - name: verifying misconfigs in helm charts 
       run: |
-        helm datree test
+        helm datree test kubernetes/myapp/
         
     - name: Login to Docker
       uses: docker/login-action@v1
@@ -55,7 +55,6 @@ jobs:
       with:
         server_address: smtp.gmail.com
         server_port: 465
-        # user credentials
         username: ${{ secrets.EMAIL_USERNAME }}
         password: ${{ secrets.EMAIL_PASSWORD }}
         # email subject
