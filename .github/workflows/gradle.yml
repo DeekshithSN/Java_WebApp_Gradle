@@ -34,7 +34,7 @@ jobs:
        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     - name: verifying misconfigs in helm charts 
       run: |
-        helm datree test
+        helm datree test kubernetes/myapp/
         
     - name: Login to Docker
       uses: docker/login-action@v1
