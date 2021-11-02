@@ -13,6 +13,7 @@ jobs:
     steps:
     - name: cleanup 
       run: |
+        whoami
         sudo chown -R $USER:$USER $GITHUB_WORKSPACE
     - uses: actions/checkout@v2
     - name: Set up JDK 11
