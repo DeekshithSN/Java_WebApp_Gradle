@@ -32,6 +32,12 @@ jobs:
       timeout-minutes: 5
       env:
        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    - name: Login to GitLab
+      uses: docker/login-action@v1
+      with:
+        registry: 34.125.22.167:8083
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
        
      
 
@@ -52,8 +58,4 @@ jobs:
         to: deekshith.snsep@gmail.com
         # from email name
         from: deekshith.snsep@gmail.com
-    - name: adding insecure registries 
-      run: |
-        echo '{ "insecure-registries":["nexus_machine_ip:8083"] }' > /etc/docker/daemon.json
-        systemctl restart docker
-        docker info 
+
