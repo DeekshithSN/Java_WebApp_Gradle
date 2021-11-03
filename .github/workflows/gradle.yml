@@ -50,6 +50,7 @@ jobs:
       run: |
         docker build -t 34.125.22.167:8083/springapp:${{ github.run_number }} .
         docker push 34.125.22.167:8083/springapp:${{ github.run_number }}
+        docker rmi 34.125.22.167:8083/springapp:${{ github.run_number }}
        
     - name: Trigger deploy
       run: |
