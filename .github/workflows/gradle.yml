@@ -50,7 +50,12 @@ jobs:
         docker build -t 34.125.22.167:8083/springapp:${{ github.run_number }} .
         docker push 34.125.22.167:8083/springapp:${{ github.run_number }}
        
-     
+    - name: Trigger deploy
+      uses: Consensys/kubernetes-action@master
+      env:
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+      with:
+        args: apply kube.yaml
 
     - name: Send email
       if: always()
