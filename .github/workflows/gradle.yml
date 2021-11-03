@@ -38,6 +38,7 @@ jobs:
        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     - name: verifying misconfigs in helm charts 
       run: |
+        sed -i "s;imagename;34.125.22.167:8083/springapp:${{ github.run_number }};g" kube.yaml
         datree test kube.yaml
         
     - name: Login to Docker
