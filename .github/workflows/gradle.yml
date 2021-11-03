@@ -54,8 +54,10 @@ jobs:
        
     - name: Trigger deploy
       run: |
+        sed -i "s;imagename;34.125.22.167:8083/springapp:${{ github.run_number }};g" kube.yaml
         kubectl apply -f kube.yaml
         kubectl get all
+        
     - name: test the application deployment 
       run: |
         sleep 60
