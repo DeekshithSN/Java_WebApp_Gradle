@@ -56,6 +56,10 @@ jobs:
       run: |
         kubectl apply -f kube.yaml
         kubectl get all
+    - name: test the application deployment 
+      run: |
+        sleep 60
+        kubectl run curl --image=curlimages/curl -i --rm --restart=Never -- curl myapp:8080
 
     - name: Send email
       if: always()
