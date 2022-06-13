@@ -1,0 +1,3 @@
+FROM Ubutun 
+
+RUN echo "this is test "
